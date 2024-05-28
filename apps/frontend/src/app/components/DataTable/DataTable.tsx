@@ -11,14 +11,30 @@ export type Column = {
   template?: (props: ColumnTemplateProps) => React.ReactNode;
 };
 
+type CheckHandler = (params: {
+  data: object;
+  index: number;
+  checked: boolean;
+}) => void;
+
 export type DataTableProps = {
   columns: Array<Column>;
   rows: Array<object>;
   selectable: boolean;
+  onCheck?: CheckHandler;
 };
+
+export const CHECKED_KEY = '_checked';
 
 export function DataTable(props: DataTableProps) {
   const { columns, rows, selectable } = props;
+  const onChange = (
+    row: object,
+    idx: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    props?.onCheck?.({ checked: e.target.checked, data: row, index: idx });
+  };
 
   return (
     <table className={styles.table}>
@@ -36,7 +52,13 @@ export function DataTable(props: DataTableProps) {
           <tr key={rowIndex}>
             {selectable && (
               <td key={`td-selectable-${rowIndex}`}>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={(row as any)[CHECKED_KEY]}
+                  onChange={(e) => {
+                    onChange(row, rowIndex, e);
+                  }}
+                />
               </td>
             )}
             {columns.map((column) => {

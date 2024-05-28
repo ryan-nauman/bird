@@ -1,3 +1,4 @@
+import { ColumnStatus } from './components/DataTable/ColumnStatus';
 import { Column, DataTable } from './components/DataTable/DataTable';
 import { data } from './data';
 import styles from './page.module.scss';
@@ -19,7 +20,7 @@ export default function Index() {
     {
       key: 'status',
       title: 'Status',
-      template: (props) => <code>{props.title}</code>,
+      template: (props) => <ColumnStatus {...props} />,
     },
   ];
 

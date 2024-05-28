@@ -1,9 +1,14 @@
 import styles from './DataTable.module.scss';
 
+export type ColumnTemplateProps = {
+  columnProps: Column;
+  data: object;
+};
+
 export type Column = {
   key: string;
   title: string;
-  template?: (props: Column) => React.ReactNode;
+  template?: (props: ColumnTemplateProps) => React.ReactNode;
 };
 
 export type DataTableProps = {
@@ -17,13 +22,15 @@ export function DataTable(props: DataTableProps) {
 
   return (
     <table className={styles.table}>
-      <tr>
-        {/* th keys in case re-ordering/other dynamic behavior is added */}
-        {selectable && <th key={`th-selectable`} />}
-        {columns.map((c) => (
-          <th key={`th-${c.key}`}>{c.title}</th>
-        ))}
-      </tr>
+      <thead>
+        <tr>
+          {/* th keys in case re-ordering/other dynamic behavior is added */}
+          {selectable && <th key={`th-selectable`} />}
+          {columns.map((c) => (
+            <th key={`th-${c.key}`}>{c.title}</th>
+          ))}
+        </tr>
+      </thead>
       <tbody>
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
@@ -47,7 +54,7 @@ export function DataTable(props: DataTableProps) {
               return (
                 <td key={column.key}>
                   {column.template
-                    ? column.template(column)
+                    ? column.template({ columnProps: column, data: row })
                     : (row as any)[column.key]}
                 </td>
               );

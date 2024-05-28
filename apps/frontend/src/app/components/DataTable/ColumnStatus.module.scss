@@ -1,0 +1,12 @@
+.column {
+  :global {
+    .icon {
+      display: inline-block;
+      padding-right: 4px;
+    }
+
+    .status {
+      text-transform: capitalize;
+    }
+  }
+}

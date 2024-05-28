@@ -3,15 +3,27 @@
 .table {
   border-collapse: collapse;
 
-  th,
-  td {
-    padding: 4px 8px;
-    text-align: left;
-    border: 0 none;
-  }
-  tr {
-    &:hover td {
-      background-color: theme.$gray;
+  :global {
+    th,
+    td {
+      padding: 8px 16px;
+      text-align: left;
+      border: 0 none;
+      border-bottom: 1px solid theme.$gray;
+    }
+    th {
+      border-top: 1px solid theme.$gray;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      font-weight: normal;
+    }
+    tr {
+      &.selected td {
+        background-color: theme.$dark-gray;
+      }
+      &:hover td {
+        background-color: theme.$light-gray;
+      }
     }
   }
 }

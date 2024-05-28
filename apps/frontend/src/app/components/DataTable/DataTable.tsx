@@ -51,7 +51,8 @@ export function DataTable(props: DataTableProps) {
       </thead>
       <tbody>
         {rows.map((row, rowIndex) => (
-          <tr key={rowIndex}>
+          // TODO: consider using clsx
+          <tr key={rowIndex} className={row[CHECKED_KEY] ? 'selected' : ''}>
             {selectable && (
               <td key={`td-selectable-${rowIndex}`}>
                 <Checkbox

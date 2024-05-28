@@ -17,18 +17,20 @@ export function Toolbar(props: ToolbarProps) {
 
   return (
     <div className={styles.toolbar}>
-      <Checkbox
-        indeterminate={checkStatus === 'indeterminate'}
-        onChange={(e) => {
-          onCheck({ checked: e.target.checked });
-        }}
-        checked={checkStatus === 'checked'}
-      />
-      <span>
-        {numberOfSelected > 0
-          ? `Selected ${numberOfSelected}`
-          : 'None Selected'}
-      </span>
+      <div className="selected-status">
+        <Checkbox
+          indeterminate={checkStatus === 'indeterminate'}
+          onChange={(e) => {
+            onCheck({ checked: e.target.checked });
+          }}
+          checked={checkStatus === 'checked'}
+        />
+        <span>
+          {numberOfSelected > 0
+            ? `Selected ${numberOfSelected}`
+            : 'None Selected'}
+        </span>
+      </div>
       {numberOfSelected > 0 && <DownloadButton selected={selected} />}
     </div>
   );

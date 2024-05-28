@@ -56,7 +56,7 @@ export function DataTable(props: DataTableProps) {
             {selectable && (
               <td key={`td-selectable-${rowIndex}`}>
                 <Checkbox
-                  checked={row[CHECKED_KEY]}
+                  checked={Boolean(row[CHECKED_KEY])}
                   onChange={(e) => {
                     onChange(row, rowIndex, e);
                   }}

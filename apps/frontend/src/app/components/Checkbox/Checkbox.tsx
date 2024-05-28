@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { InputHTMLAttributes } from 'react';
 
-type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+type CheckboxProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'checked'
+> & {
   indeterminate?: boolean;
+  checked: boolean;
 };
 
 export function Checkbox({ indeterminate = false, ...props }: CheckboxProps) {

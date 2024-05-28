@@ -1,0 +1,17 @@
+@use '../../theme';
+
+.table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 4px 8px;
+    text-align: left;
+    border: 0 none;
+  }
+  tr {
+    &:hover td {
+      background-color: theme.$gray;
+    }
+  }
+}

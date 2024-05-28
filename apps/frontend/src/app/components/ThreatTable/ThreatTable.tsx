@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { ColumnStatus } from '../DataTable/ColumnStatus';
 import { CHECKED_KEY, Column, DataTable } from '../DataTable/DataTable';
+import { Checkbox } from '../Checkbox/Checkbox';
+import styles from './ThreatTable.module.scss';
+import { Toolbar, ToolbarProps } from './Toolbar';
 
 const columns: Array<Column> = [
   {
@@ -31,10 +34,38 @@ type ThreatTableProps = {
 export function ThreatTable(props: ThreatTableProps) {
   const { data: rawData } = props;
   const [data, setData] = useState([...rawData]);
+  const numberOfSelected = data.filter(
+    (item) => (item as any)[CHECKED_KEY]
+  ).length;
+
+  let checkStatus: ToolbarProps['checkStatus'] = 'unchecked';
+  if (numberOfSelected > 0 && data.length !== numberOfSelected) {
+    checkStatus = 'indeterminate';
+  } else if (numberOfSelected > 0 && data.length === numberOfSelected) {
+    checkStatus = 'checked';
+  }
 
   return (
-    <div>
-      <span>Threats</span>
+    <div className={styles.table}>
+      <Toolbar
+        checkStatus={checkStatus}
+        onCheck={(e) => {
+          if (e.checked) {
+            setData((prevData) => {
+              const newData = [...prevData];
+              newData.forEach((item) => ((item as any)[CHECKED_KEY] = true));
+              return newData;
+            });
+          } else {
+            setData((prevData) => {
+              const newData = [...prevData];
+              newData.forEach((item) => ((item as any)[CHECKED_KEY] = false));
+              return newData;
+            });
+          }
+        }}
+        numberOfSelected={numberOfSelected}
+      />
       <DataTable
         columns={columns}
         rows={data}

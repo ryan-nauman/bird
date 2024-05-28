@@ -1,3 +1,4 @@
+import { Checkbox } from '../Checkbox/Checkbox';
 import styles from './DataTable.module.scss';
 
 export type ColumnTemplateProps = {
@@ -52,8 +53,7 @@ export function DataTable(props: DataTableProps) {
           <tr key={rowIndex}>
             {selectable && (
               <td key={`td-selectable-${rowIndex}`}>
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={(row as any)[CHECKED_KEY]}
                   onChange={(e) => {
                     onChange(row, rowIndex, e);

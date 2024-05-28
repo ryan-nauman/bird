@@ -5,7 +5,8 @@
   "scripts": {
     "nx": "npx nx",
     "dev": "npx nx run frontend:dev",
-    "test": "npx nx run frontend:test"
+    "test": "npx nx run frontend:test",
+    "e2e": "npx nx e2e frontend-e2e"
   },
   "private": true,
   "dependencies": {

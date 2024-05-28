@@ -2,7 +2,10 @@
   "name": "@bird/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx": "npx nx",
+    "dev": "npx nx run frontend:dev"
+  },
   "private": true,
   "dependencies": {
     "next": "14.2.3",

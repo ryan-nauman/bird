@@ -1,4 +1,6 @@
 import { Checkbox } from '../Checkbox/Checkbox';
+import { DownloadButton } from './DownloadButton';
+import { ThreatData } from './ThreatTable';
 import styles from './ThreatTable.module.scss';
 
 type CheckHandler = (params: { checked: boolean }) => void;
@@ -7,10 +9,11 @@ export type ToolbarProps = {
   checkStatus: 'indeterminate' | 'checked' | 'unchecked';
   onCheck: CheckHandler;
   numberOfSelected: number;
+  selected: Array<ThreatData>;
 };
 
 export function Toolbar(props: ToolbarProps) {
-  const { checkStatus, onCheck, numberOfSelected } = props;
+  const { checkStatus, onCheck, numberOfSelected, selected } = props;
 
   return (
     <div className={styles.toolbar}>
@@ -26,6 +29,7 @@ export function Toolbar(props: ToolbarProps) {
           ? `Selected ${numberOfSelected}`
           : 'None Selected'}
       </span>
+      {numberOfSelected > 0 && <DownloadButton selected={selected} />}
     </div>
   );
 }

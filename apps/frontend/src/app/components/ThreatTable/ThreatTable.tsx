@@ -27,16 +27,23 @@ const columns: Array<Column> = [
   },
 ];
 
+export type ThreatData = {
+  name: string;
+  device: string;
+  path: string;
+  status: 'scheduled' | 'available';
+  [CHECKED_KEY]?: boolean;
+};
+
 type ThreatTableProps = {
-  data: Array<object>;
+  data: Array<ThreatData>;
 };
 
 export function ThreatTable(props: ThreatTableProps) {
   const { data: rawData } = props;
   const [data, setData] = useState([...rawData]);
-  const numberOfSelected = data.filter(
-    (item) => (item as any)[CHECKED_KEY]
-  ).length;
+  const selected = data.filter((item) => item[CHECKED_KEY]);
+  const numberOfSelected = selected.length;
 
   let checkStatus: ToolbarProps['checkStatus'] = 'unchecked';
   if (numberOfSelected > 0 && data.length !== numberOfSelected) {
@@ -53,18 +60,19 @@ export function ThreatTable(props: ThreatTableProps) {
           if (e.checked) {
             setData((prevData) => {
               const newData = [...prevData];
-              newData.forEach((item) => ((item as any)[CHECKED_KEY] = true));
+              newData.forEach((item) => (item[CHECKED_KEY] = true));
               return newData;
             });
           } else {
             setData((prevData) => {
               const newData = [...prevData];
-              newData.forEach((item) => ((item as any)[CHECKED_KEY] = false));
+              newData.forEach((item) => (item[CHECKED_KEY] = false));
               return newData;
             });
           }
         }}
         numberOfSelected={numberOfSelected}
+        selected={selected}
       />
       <DataTable
         columns={columns}

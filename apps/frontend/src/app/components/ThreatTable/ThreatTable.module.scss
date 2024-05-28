@@ -6,3 +6,18 @@
     font-size: 24px;
   }
 }
+
+.downloadButton {
+  cursor: pointer;
+  background: none;
+  font-size: 24px;
+
+  :global {
+    .icon {
+      display: inline-block;
+    }
+    em {
+      font-size: 12px;
+    }
+  }
+}

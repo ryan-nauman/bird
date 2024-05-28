@@ -1,4 +1,5 @@
 import { Checkbox } from '../Checkbox/Checkbox';
+import { ThreatData } from '../ThreatTable/ThreatTable';
 import styles from './DataTable.module.scss';
 
 export type ColumnTemplateProps = {
@@ -20,7 +21,7 @@ type CheckHandler = (params: {
 
 export type DataTableProps = {
   columns: Array<Column>;
-  rows: Array<object>;
+  rows: Array<ThreatData>;
   selectable: boolean;
   onCheck?: CheckHandler;
 };
@@ -30,7 +31,7 @@ export const CHECKED_KEY = '_checked';
 export function DataTable(props: DataTableProps) {
   const { columns, rows, selectable } = props;
   const onChange = (
-    row: object,
+    row: ThreatData,
     idx: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -54,7 +55,7 @@ export function DataTable(props: DataTableProps) {
             {selectable && (
               <td key={`td-selectable-${rowIndex}`}>
                 <Checkbox
-                  checked={(row as any)[CHECKED_KEY]}
+                  checked={row[CHECKED_KEY]}
                   onChange={(e) => {
                     onChange(row, rowIndex, e);
                   }}

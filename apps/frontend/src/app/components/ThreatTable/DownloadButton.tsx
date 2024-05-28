@@ -20,7 +20,7 @@ export function DownloadButton(props: DownloadButtonProps) {
 
   return (
     <button className={styles.downloadButton} onClick={onClick}>
-      <Download className="icon" />
+      <Download className="icon" aria-hidden="true" />
       <span>Download Selected</span>
       {downloadable.length === 0 && (
         <em>

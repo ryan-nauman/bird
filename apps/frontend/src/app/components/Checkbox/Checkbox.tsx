@@ -1,15 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useId, useRef } from 'react';
 import { InputHTMLAttributes } from 'react';
+import styles from './Checkbox.module.scss';
 
 type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'type' | 'checked'
+  'type' | 'checked' | 'id'
 > & {
   indeterminate?: boolean;
   checked: boolean;
+  screenReaderLabel?: string;
 };
 
-export function Checkbox({ indeterminate = false, ...props }: CheckboxProps) {
+export function Checkbox(props: CheckboxProps) {
+  const { indeterminate = false, screenReaderLabel, ...rest } = props;
+  const id = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -18,5 +22,14 @@ export function Checkbox({ indeterminate = false, ...props }: CheckboxProps) {
     }
   }, [indeterminate]);
 
-  return <input {...props} type="checkbox" ref={inputRef} />;
+  return (
+    <>
+      <input id={id} {...rest} type="checkbox" ref={inputRef} />
+      {screenReaderLabel && (
+        <label className={styles.srOnly} htmlFor={id}>
+          {screenReaderLabel}
+        </label>
+      )}
+    </>
+  );
 }

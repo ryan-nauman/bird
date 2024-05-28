@@ -23,7 +23,7 @@ export function ColumnStatus(props: ColumnTemplateProps) {
 
   return (
     <span className={styles.column}>
-      <Circle className="icon" fill={fill} stroke="none" />
+      <Circle className="icon" fill={fill} stroke="none" aria-hidden="true" />
       <span className="status">{value}</span>
     </span>
   );

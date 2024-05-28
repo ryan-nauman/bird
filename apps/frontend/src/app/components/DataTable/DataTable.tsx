@@ -60,6 +60,7 @@ export function DataTable(props: DataTableProps) {
                   onChange={(e) => {
                     onChange(row, rowIndex, e);
                   }}
+                  screenReaderLabel="Toggle row selection"
                 />
               </td>
             )}

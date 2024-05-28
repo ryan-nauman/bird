@@ -24,6 +24,7 @@ export function Toolbar(props: ToolbarProps) {
             onCheck({ checked: e.target.checked });
           }}
           checked={checkStatus === 'checked'}
+          screenReaderLabel="Toggle selection of all items"
         />
         <span>
           {numberOfSelected > 0

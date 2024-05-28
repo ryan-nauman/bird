@@ -2,7 +2,7 @@ import React, { useEffect, useId, useRef } from 'react';
 import { InputHTMLAttributes } from 'react';
 import styles from './Checkbox.module.scss';
 
-type CheckboxProps = Omit<
+export type CheckboxProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type' | 'checked' | 'id'
 > & {
@@ -24,7 +24,13 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <>
-      <input id={id} {...rest} type="checkbox" ref={inputRef} />
+      <input
+        id={id}
+        {...rest}
+        type="checkbox"
+        ref={inputRef}
+        aria-checked={indeterminate ? 'mixed' : rest.checked}
+      />
       {screenReaderLabel && (
         <label className={styles.srOnly} htmlFor={id}>
           {screenReaderLabel}
